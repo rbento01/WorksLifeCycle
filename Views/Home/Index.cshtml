@@ -1,0 +1,202 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Projeto de pesquisa, entrega de relatórios de mestrado, entre outras coisas" />
+    <meta name="author" content="João Matos e Rodrigo Bento" />
+    <title>Frontpage</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+</head>
+<body>
+    @*User no role aluno*@
+    @if (User.IsInRole("Student"))
+    {
+        <!-- Features section-->
+        <section class="py-5 border-bottom" id="features">
+            <div class="container px-5 my-5">
+            <div class="row gx-5 justify-content-center">
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                        <div class="feature text-white rounded-3 mb-3" style="background-color: #88b77b;"><i class="bi bi-collection"></i>
+
+        </div>
+                    <h2 class="h4 fw-bolder">Projetos</h2>
+                    <p>Lista dos Projetos.</p>
+                        <a class="text-decoration-underline" style="color:#88b77b;" asp-area="" asp-controller="Projects" asp-action="Index">
+                        Ver Projetos
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+
+                @*<div class="col-lg-4 mb-5 mb-lg-0">
+                        <div class="feature text-white rounded-3 mb-3" style="background-color: #88b77b;"><i class="bi bi-person-lines-fill"></i></div>
+                    <h2 class="h4 fw-bolder">Grupos</h2>
+                    <p>Ver/Criar grupo para concorrer a um projeto.</p>
+                        <a class="text-decoration-underline" style="color:#88b77b;" asp-area="" asp-controller="Groups" asp-action="Index">
+                        Ver Grupo
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>*@
+            </div>
+        </div>
+    </section> 
+    }
+    @if (User.IsInRole("Teacher")) {
+        <!-- Features section-->
+        <section class="py-5 border-bottom" id="features">
+            <div class="container px-5 my-5">
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                        <div class="feature text-white rounded-3 mb-3" style="background-color: #88b77b;">
+                            <i class="bi bi-collection"></i>
+
+                        </div>
+                        <h2 class="h4 fw-bolder">Projetos</h2>
+                        <p>Lista dos Projetos.</p>
+                        <a class="text-decoration-underline" style="color:#88b77b;" asp-area="" asp-controller="Projects" asp-action="Index">
+                            Ver Projetos
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    @*<div class="col-lg-4 mb-5 mb-lg-0">
+                        <div class="feature text-white rounded-3 mb-3" style="background-color: #88b77b;"><i class="bi bi-person-lines-fill"></i></div>
+                        <h2 class="h4 fw-bolder">Grupos</h2>
+                        <p>Lista dos Grupos.</p>
+                        <a class="text-decoration-underline" style="color:#88b77b;" asp-area="" asp-controller="Groups" asp-action="Index">
+                            Ver Grupo
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>*@
+                </div>
+            </div>
+        </section>
+    }
+    @if (User.IsInRole("Admin")) {
+        <!-- Features section--> 
+            <div class="dashboardz">
+            <div class=" justify-content-end">
+                    <div class="dropdown custom-dropdown">
+                        <a href="#" data-toggle="dropdown" class="dropdown-link" aria-haspopup="true" aria-expanded="false">
+
+                            Dashboard<span class="icon-keyboard_arrow_down arrow"></span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" asp-controller="AccessTypes" asp-action="Index">Tipos de Acesso</a>
+                            <a class="dropdown-item" asp-controller="Areas" asp-action="Index">Áreas</a>
+                            <a class="dropdown-item" asp-controller="Collections" asp-action="Index">Coleções</a>
+                            <a class="dropdown-item" asp-controller="Courses" asp-action="Index">Cursos </a>
+                            <a class="dropdown-item" asp-controller="SchoolYear" asp-action="Index">Ano Letivo </a>
+                            <a class="dropdown-item" asp-controller="Languages" asp-action="Index">Linguagens </a>
+                            <a class="dropdown-item" asp-controller="OrganicUnits" asp-action="Index">Organic Units </a>
+                            <a class="dropdown-item" asp-controller="Specializations" asp-action="Index">Especializações </a>
+
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <section class="py-5 border-bottom" id="features">
+            <div class="container px-5 my-5">
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                        <div class="feature text-white rounded-3 mb-3" style="background-color: #88b77b;">
+                            <i class="bi bi-collection"></i>
+                        </div>
+                        <h2 class="h4 fw-bolder">Projetos</h2>
+                        <p>Lista dos Projetos.</p>
+                        <a class="text-decoration-underline" style="color:#88b77b;" asp-area="" asp-controller="Projects" asp-action="Index">
+                            Ver Projetos
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+    @if (User.IsInRole("Secretary")) {
+        <section class="py-5 border-bottom" id="features">
+            <div class="container px-5 my-5">
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                        <div class="feature text-white rounded-3 mb-3" style="background-color: #88b77b;">
+                            <i class="bi bi-collection"></i>
+                        </div>
+                        <h2 class="h4 fw-bolder">Projetos</h2>
+                        <p>Lista dos Projetos.</p>
+                        <a class="text-decoration-underline" style="color:#88b77b;" asp-area="" asp-controller="Projects" asp-action="Index">
+                            Ver Projetos
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+    <!-- News section-->
+    <section class="bg-light py-5 border-bottom">
+        <div class="container px-5 my-5">
+            <div class="text-center mb-5">
+
+                <h1 style="text-align:center; padding-top: 50px;">Project Codename: Works_LifeCycle</h1>
+
+                <p class="lead mb-0">Plataforma para gestão dos trabalhos académicos no IPT</p>
+                <h2>Funcionalidades</h2>
+            </div>
+            <div class="row gx-5 justify-content-center">
+                <!-- Noticia esquerda-->
+                <div class="col-lg-6 col-xl-4">
+                    <div class="card mb-5 mb-xl-0">
+                        <div class="card-body p-5">
+                            <div class="small text-uppercase fw-bold text-muted">Propostas de Projetos</div>
+                            <ul>
+                                <li class="mb-2">
+                                <i class="arrow-right-square-fill"></i>
+                                    Permite aos docentes e às entidades externas submeter propostas de projetos finais nos mestrados e licenciaturas existentes no IPT.
+                            </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Noticia Centro-->
+                <div class="col-lg-6 col-xl-4">
+                    <div class="card mb-5 mb-xl-0">
+                        <div class="card-body p-5">
+                            <div class="small text-uppercase fw-bold text-muted">Candidaturas a Projetos</div>
+                            <ul>
+                                <li class="mb-2">
+                                    <i class="arrow-right-square-fill"></i>
+                                    Permite que os alunos consultem as propostas de projetos disponiveis.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Noticia Direita-->
+                <div class="col-lg-6 col-xl-4">
+                    <div class="card mb-5 mb-xl-0">
+                        <div class="card-body p-5">
+                            <div class="small text-uppercase fw-bold text-muted">Submissão de projetos</div>
+                            <ul>
+                                <li class="mb-2">
+                                    <i class="arrow-right-square-fill"></i>
+                                    Permite aos alunos submeter o trabalho realizado no âmbito do seu projeto, cumprindo todos os requisitos do regulamento em vigor,
+                                    propondo-se assim à avaliação.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

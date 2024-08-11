@@ -1,0 +1,55 @@
+﻿@model Works_Life_Cycle.Models.Course
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Adicionar Novo</h1>
+
+<h4>Curso</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Code" class="control-label"></label>
+                <input asp-for="Code" class="form-control" />
+                <span asp-validation-for="Code" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SpecializationFK" class="control-label"></label>
+                <input asp-for="SpecializationFK" class="form-control" />
+                <span asp-validation-for="SpecializationFK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AreaFK" class="control-label"></label>
+                <select asp-for="AreaFK" class ="form-control" asp-items="ViewBag.AreaFK"></select>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Partnership" /> @Html.DisplayNameFor(model => model.Partnership)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="CollectionFK" class="control-label"></label>
+                <select asp-for="CollectionFK" class ="form-control" asp-items="ViewBag.CollectionFK"></select>
+            </div>
+            <div class="form-group" style="margin-top:10px; margin-bottom:20px;">
+                <input type="submit" value="Create" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index" class="btn btn-primary" style="margin-bottom:10px;">Voltar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

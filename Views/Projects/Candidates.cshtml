@@ -1,0 +1,58 @@
+﻿@model dynamic
+
+@{
+    ViewData["Title"] = "Candidates";
+}
+@foreach(var item in ViewBag.Candidates){
+    if (item.AcceptanceStatus)
+    {
+        <h1>Aluno</h1>
+    }
+    else
+    {
+        <h1>Candidatos</h1>
+    }
+}
+<p>   
+</p>
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                Estudante
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody class="table-success">
+        @*Percorre todos os grupos existentes*@
+        @foreach (var candidate in ViewBag.Candidates) {
+            
+                <tr>
+                    <td>
+                        @candidate.Name
+                    </td>
+                    @if (User.IsInRole("Teacher"))
+                    {
+                        @if (ViewBag.Orientador == true)
+                        {
+                            <td>
+                                <form asp-action="Accept">
+                                    <input type="hidden" name="ProjectId" value="@candidate.ProjectId" />
+                                    <input type="hidden" name="StudentId" value="@candidate.StudentId" />
+                                    @if (ViewBag.Accept)
+                                    {
+                                        <input type="submit" value="Aceitar" class="btn btn-success" />
+                                    }
+                        </form>
+                            </td>
+                        }
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                </tr>
+        }
+    </tbody>
+</table>

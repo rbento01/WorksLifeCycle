@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Works_Life_Cycle.Models.Project>
+
+@{
+    ViewData["Title"] = "IndexU";
+}
+
+<h1>Os Meus Projetos</h1>
+
+<table class="table table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Handle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DefenceDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Collection)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SchoolYear)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody class="table-success">
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.ProjectId" style="color:black">@Html.DisplayFor(modelItem => item.Title)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Handle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DefenceDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Collection.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SchoolYear.Name)
+            </td>
+            <td>
+                
+                
+                @if (User.IsInRole("Student") ){
+                    if(ViewBag.Submitted == false){
+                        <a asp-action="Submit" asp-route-id="@item.ProjectId" class="btn btn-primary">Entregar</a> 
+                    }else{
+                        <a class="btn btn-primary">Projeto Entregue</a> 
+                    }
+                }else if(User.IsInRole("Teacher") ){
+                    @foreach (var proj in ViewBag.Candidates){
+                        if(proj.ProjectId == item.ProjectId && proj.AcceptanceStatus == true)
+                        {
+                            <a asp-action="Candidates" asp-route-id="@item.ProjectId" class="btn btn-info">Ver aluno</a>
+                        }else if(proj.ProjectId == item.ProjectId && proj.AcceptanceStatus == false){
+                            <a asp-action="Candidates" asp-route-id="@item.ProjectId" class="btn btn-info">Ver candidatos</a>
+                        }
+                    }
+                    @foreach(var proj in ViewBag.Graded){
+                        if(proj.ProjectId == item.ProjectId){
+                            <a class="btn btn-primary">Projeto Avaliado</a> 
+                        }
+                    }
+                    @foreach(var projs in ViewBag.Projects){
+                        if(projs.ProjectId == item.ProjectId){
+                            <a asp-action="Edit" asp-route-id="@item.ProjectId" class="btn btn-primary">Avaliar</a> 
+                        }
+                    }
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+

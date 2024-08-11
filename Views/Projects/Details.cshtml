@@ -1,0 +1,155 @@
+﻿@using System.Collections
+@model Works_Life_Cycle.Models.Project
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalhes</h1>
+
+<div>
+    <h4>Projeto</h4>
+    <hr />
+    <dl class="row" style="float:left; width:550px"> 
+        <dt class = "col-sm-3">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-3">
+                @Html.DisplayNameFor(model => model.DefenceDate)
+            </dt>
+            <dd class = "col-sm-9">
+                @Html.DisplayFor(model => model.DefenceDate)
+            </dd>
+
+        @if (User.IsInRole("Teacher") || User.IsInRole("Secretary") || (User.IsInRole("Student") && ViewBag.Submmited == true))
+        {
+            <dt class = "col-sm-3">
+                @Html.DisplayNameFor(model => model.InternalID)
+            </dt>
+            <dd class = "col-sm-9">
+                @Html.DisplayFor(model => model.InternalID)
+            </dd>
+            <dt class = "col-sm-3">
+                @Html.DisplayNameFor(model => model.AbstractPT)
+            </dt>
+            <dd class = "col-sm-9">
+                @Html.DisplayFor(model => model.AbstractPT)
+            </dd>
+            <dt class = "col-sm-3">
+                @Html.DisplayNameFor(model => model.AbstractEN)
+            </dt>
+            <dd class = "col-sm-9">
+                @Html.DisplayFor(model => model.AbstractEN)
+            </dd>
+            <dt class = "col-sm-3">
+                @Html.DisplayNameFor(model => model.Comments)
+            </dt>
+            <dd class = "col-sm-9">
+                @Html.DisplayFor(model => model.Comments)
+            </dd>
+            <dt class = "col-sm-3">
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
+            <dd class = "col-sm-9">
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+            <dt class = "col-sm-3">
+                @Html.DisplayNameFor(model => model.TID)
+            </dt>
+            <dd class = "col-sm-9">
+                @Html.DisplayFor(model => model.TID)
+            </dd>
+            @if (ViewBag.Graded){
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Grade)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Grade)
+                </dd>
+            }
+            
+        }
+    </dl>
+    <dl class="row" style="float:left; width:600px">
+        @if (User.IsInRole("Teacher") || User.IsInRole("Secretary") || (User.IsInRole("Student") && ViewBag.Submmited == true))
+        {
+            <dt class = "col-sm-3">
+                @Html.DisplayNameFor(model => model.Handle)
+            </dt>
+            <dd class = "col-sm-9">
+                @Html.DisplayFor(model => model.Handle)
+            </dd>
+            <dt class = "col-sm-3">
+                @Html.DisplayNameFor(model => model.License)
+            </dt>
+            <dd class = "col-sm-9">
+                @Html.DisplayFor(model => model.License.LicenseName)
+            </dd>
+            <dt class = "col-sm-3">
+                @Html.DisplayNameFor(model => model.Language)
+            </dt>
+            <dd class = "col-sm-9">
+                @Html.DisplayFor(model => model.Language.Name)
+            </dd>
+            <dt class = "col-sm-3">
+                @Html.DisplayNameFor(model => model.Collection)
+            </dt>
+            <dd class = "col-sm-9">
+                @Html.DisplayFor(model => model.Collection.Name)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.AccessType)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.AccessType.Name)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.SchoolYear)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.SchoolYear.Name)
+            </dd>
+        }
+        @foreach(var file in ViewBag.Files)
+        {     
+            <dt class = "col-sm-3">
+                File(s)
+            </dt>
+            <dd class = "col-sm-9">
+                <a href="~/ficheiros/@file.Name" download>
+                    <img src="~/Logo/LogoFicheiros.png" alt="PDF" width="50" height="50">
+                </a>
+                <p class="text-decoration-underline">@file.Name</p>
+            </dd> 
+        }
+    </dl>
+</div>
+
+
+
+<div>
+    @if(User.IsInRole("Student")){
+            @if(ViewBag.Apply == true)
+            {
+                <form asp-action="Apply">
+                    <input type="hidden" name="ProjectId" value="@Model.ProjectId" />
+                    @if(ViewBag.Apply){
+                        <input type="submit" value="Candidatar" class="btn btn-primary" />
+                    }
+                </form>
+            }else{
+                <input type="button" value="Já se candidatou/Já está atribuido" class="btn btn-danger" />
+            }
+    }
+    @if (User.IsInRole("Teacher") || User.IsInRole("Secretary")) {
+        @if (ViewBag.Edit){
+            <a asp-action="Edit" asp-route-id="@Model?.ProjectId" class="btn btn-warning">Editar</a>
+        }
+    }
+    <br />
+    <br />
+    <a asp-action="Index" class="btn btn-primary" style="margin-bottom:5px;" >Voltar</a> 
+</div>

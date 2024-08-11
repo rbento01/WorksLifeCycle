@@ -1,0 +1,151 @@
+﻿@model Works_Life_Cycle.Models.Project
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Editar</h1>
+
+<h4>Projeto</h4>
+<hr />
+
+
+@*Se o utilizador for prof*@
+
+    <div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            @if (User.IsInRole("Teacher") && ViewBag.Unsubmmited) { 
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ProjectId" value=@Model.ProjectId/>
+            <div class="form-group fpad">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="InternalID" value=@Model.InternalID/>
+            <input type="hidden" asp-for="AbstractPT" value=@Model.AbstractPT/>
+            <input type="hidden" asp-for="AbstractEN" value=@Model.AbstractEN/>
+            <input type="hidden" asp-for="Comments" value=@Model.Comments/>
+            <input type="hidden" asp-for="Status" value=@Model.Status/>
+            <input type="hidden" asp-for="TID" value=@Model.TID/>
+            <input type="hidden" asp-for="Handle" value=@Model.Handle/>
+            <input type="hidden" asp-for="Grade" value=@Model.Grade/>
+            <div class="form-group fpad">
+                <label asp-for="DefenceDate" class="control-label"></label>
+                <input asp-for="DefenceDate" class="form-control" />
+                <span asp-validation-for="DefenceDate" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="StudentFK" value=@Model.StudentFK/>
+            <input type="hidden" asp-for="AccessTypeFK" value=@Model.AccessTypeFK/>
+            <div class="form-group fpad">
+                <label asp-for="SchoolYearFK" class="control-label">School Year</label>
+                <select asp-for="SchoolYearFK" class ="form-select" asp-items="ViewBag.SchoolYearFK" name="Epoca"></select>
+            </div>
+            <input type="hidden" asp-for="LanguageFK" value=@Model.LanguageFK/>
+            <div class="form-group fpad">
+                <label asp-for="CollectionFK" class="control-label">Collection</label>
+                <select asp-for="CollectionFK" class ="form-select" asp-items="ViewBag.CollectionFK" name="Collection"></select>
+            </div>
+            <input type="hidden" asp-for="LicenseFK" value=@Model.LicenseFK/>
+            <div class="form-group fpad">
+                <label asp-for="CourseFK" class="control-label">Curso</label>
+                <select asp-for="CourseFK" class ="form-select" asp-items="ViewBag.CourseFK" name="Course"></select>
+            </div>
+            <div class="form-group fpad">
+                <label asp-for="ListofTeachers" class="control-label">Orientadores</label>
+                <select asp-for="ListofTeachers" class="form-select" asp-items="ViewBag.TeacherFK" name="Orientadores"></select>
+            </div>
+            <div class="form-group fpad">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        }
+        else if(User.IsInRole("Teacher") && ViewBag.Unsubmmited == false){
+            <input type="hidden" asp-for="ProjectId" value=@Model.ProjectId/>
+            <input type="hidden" asp-for="Title" value=@Model.Title/>
+            <input type="hidden" asp-for="InternalID" value=@Model.InternalID/>
+            <input type="hidden" asp-for="AbstractPT" value=@Model.AbstractPT/>
+            <input type="hidden" asp-for="AbstractEN" value=@Model.AbstractEN/>
+            <input type="hidden" asp-for="Comments" value=@Model.Comments/>
+            <input type="hidden" asp-for="Status" value=@Model.Status/>
+            <input type="hidden" asp-for="TID" value=@Model.TID/>
+            <input type="hidden" asp-for="Handle" value=@Model.Handle/>
+            <div class="form-group fpad">
+                <label asp-for="Grade" class="control-label"></label>
+                <input asp-for="Grade" class="form-control" min="1" max="20"/>
+                <span asp-validation-for="Grade" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="DefenceDate" value=@Model.DefenceDate/>
+            <input type="hidden" asp-for="StudentFK" value=@Model.StudentFK/>
+            <input type="hidden" asp-for="AccessTypeFK" value=@Model.AccessTypeFK/>
+            <input type="hidden" asp-for="SchoolYearFK" value=@Model.SchoolYearFK/>
+            <input type="hidden" asp-for="LanguageFK" value=@Model.LanguageFK/>
+            <input type="hidden" asp-for="CollectionFK" value=@Model.CollectionFK/>
+            <input type="hidden" asp-for="LicenseFK" value=@Model.LicenseFK/>
+            <input type="hidden" asp-for="CourseFK" value=@Model.CourseFK/>
+            <div class="form-group fpad">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        }
+        </form>
+    </div>
+</div>
+
+@if (User.IsInRole("Secretary")) {
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="ProjectId" value=@Model.ProjectId/>
+                <input type="hidden" asp-for="Title" value=@Model.Title/>
+                <div class="form-group fpad">
+                    <label asp-for="InternalID" class="control-label"></label>
+                    <input asp-for="InternalID" class="form-control" />
+                    <span asp-validation-for="InternalID" class="text-danger"></span>
+                </div>
+                <input type="hidden" asp-for="AbstractPT" value=@Model.AbstractPT/>
+                <input type="hidden" asp-for="AbstractEN" value=@Model.AbstractEN/>
+                <input type="hidden" asp-for="Comments" value=@Model.Comments/>
+                <div class="form-group fpad">
+                    <label asp-for="Status" class="control-label"></label>
+                    <select asp-for="Status" class="form-control" asp-items="Html.GetEnumSelectList<Status>()" >
+                        <option value="">Please choose your Gender</option>
+                    </select>
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                </div>
+                <div class="form-group fpad">
+                    <label asp-for="TID" class="control-label"></label>
+                    <input asp-for="TID" class="form-control" />
+                    <span asp-validation-for="TID" class="text-danger"></span>
+                </div>
+                <div class="form-group fpad">
+                    <label asp-for="Handle" class="control-label"></label>
+                    <input asp-for="Handle" class="form-control" />
+                    <span asp-validation-for="Handle" class="text-danger"></span>
+                </div>
+                <input type="hidden" asp-for="Grade" value=@Model.Grade/>
+                <input type="hidden" asp-for="DefenceDate" value=@Model.DefenceDate/>
+                <input type="hidden" asp-for="StudentFK" value=@Model.StudentFK/>
+                <div class="form-group fpad">
+                    <label asp-for="AccessTypeFK" class="control-label">Tipo de acesso</label>
+                    <select asp-for="AccessTypeFK" class="form-control" asp-items="ViewBag.AccessTypeFK" name="AccessTypeFK"></select>
+                </div>
+                <input type="hidden" asp-for="SchoolYearFK" value=@Model.SchoolYearFK/>
+                <input type="hidden" asp-for="LanguageFK" value=@Model.LanguageFK/>
+                <input type="hidden" asp-for="CollectionFK" value=@Model.CollectionFK/>
+                <input type="hidden" asp-for="LicenseFK" value=@Model.LicenseFK/>
+                <input type="hidden" asp-for="CourseFK" value=@Model.CourseFK/>
+                <div class="form-group fpad">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+}
+<div>
+    <a asp-action="Index" class="btn btn-primary" style="margin-left:5px;">Voltar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

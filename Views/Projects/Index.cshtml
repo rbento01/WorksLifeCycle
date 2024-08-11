@@ -1,0 +1,107 @@
+﻿@model IEnumerable<Works_Life_Cycle.Models.Project>
+
+@{
+    ViewData["Title"] = "Index";
+    int count = 0;
+}
+<h1>Projetos</h1>
+@if (User.IsInRole("Teacher"))
+{
+    <p>
+        <a asp-action="Create" class="btn btn-success">Adicionar Novo</a>
+    </p>
+}
+
+<table class="table table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Handle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DefenceDate)
+            </th>
+            <th>
+                Curso
+            </th>
+            <th>
+                Departamento
+            </th>
+            <th>
+                Ano Escolar
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody class="table-success">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Details" class="teste" asp-route-id="@item.ProjectId" style="color:black; text-decoration:underline; ">@Html.DisplayFor(modelItem => item.Title)</a>
+                </td>
+                @if(item.Handle != null){
+                    <td>
+                        <a href="@Html.DisplayFor(modelItem => item.Handle)">Link</a>
+                    </td>
+                }else{
+                    <td>
+                        
+                    </td>
+                }
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.DefenceDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Course.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Collection.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SchoolYear.Name)
+                </td>
+                <td>
+                    @if (User.IsInRole("Teacher") || User.IsInRole("Secretary"))
+                    {
+                        @foreach (var proj in ViewBag.Candidates)
+                        {
+                            /**/
+                            if (proj.ProjectId == item.ProjectId && proj.AcceptanceStatus == true)
+                            {
+                                <a asp-action="Candidates" asp-route-id="@item.ProjectId" class="btn btn-info">Ver aluno</a>
+                            }
+                            else if (proj.ProjectId == item.ProjectId && proj.AcceptanceStatus == false && count < 1)
+                            {
+                                count++;
+                                <a asp-action="Candidates" asp-route-id="@item.ProjectId" class="btn btn-info">Ver candidatos</a>
+                            }
+                        }
+                        count = 0;
+
+                        @foreach (var project in ViewBag.Teachers)
+                        {
+                            if (project.ProjectId == item.ProjectId)
+                            {
+                                <a asp-action="Edit" asp-route-id="@item.ProjectId" class="btn btn-warning">Editar</a>
+                                <a asp-action="Delete" asp-route-id="@item.ProjectId" class="btn btn-danger">Apagar</a>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <a asp-action="Details" asp-route-id="@item.ProjectId" class="btn btn-info">Detalhes</a>
+                    }
+                    @if (User.IsInRole("Secretary"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.ProjectId" class="btn btn-warning">Editar</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

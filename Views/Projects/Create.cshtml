@@ -1,0 +1,57 @@
+﻿@model Works_Life_Cycle.Models.Project
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Adicionar Novo</h1>
+
+<h4>Projeto</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group fpad">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group fpad">
+                <label asp-for="DefenceDate" class="control-label"></label>
+                <input asp-for="DefenceDate" class="form-control" />
+                <span asp-validation-for="DefenceDate" class="text-danger"></span>
+            </div>
+            <div class="form-group fpad">
+                <label asp-for="CourseFK" class="control-label">Curso</label>
+                <select asp-for="CourseFK" class ="form-select" asp-items="ViewBag.CourseFK" name="Course"></select>
+            </div>
+            <div class="form-group fpad">
+                <label asp-for="CollectionFK" class="control-label">Collection</label>
+                <select asp-for="CollectionFK" class ="form-select" asp-items="ViewBag.CollectionFK" name="Collection"></select>
+            </div>
+            <div class="form-group fpad">
+                <label asp-for="SchoolYearFK" class="control-label">School Year</label>
+                <select asp-for="SchoolYearFK" class ="form-select" asp-items="ViewBag.SchoolYearFK" name="Epoca"></select>
+            </div>
+            <div class="form-group fpad">
+                <label asp-for="ListofTeachers" class="control-label">Orientadores</label>
+                <select asp-for="ListofTeachers" class="form-select" asp-items="ViewBag.TeacherFK" name="Orientadores"></select>
+            </div>
+            <div class="form-group fpad">
+                <label class="control-label">Enunciado(pdf)</label>
+                <input accept=".pdf" type="file" name="file" class="form-control" multiple/>
+            </div>
+            <div class="form-group" style="margin-top:10px; margin-bottom:20px; margin-left:5px;">
+                <input type="submit" value="Create" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index" class="btn btn-primary" style="margin-bottom:10px; margin-left:5px;">Voltar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

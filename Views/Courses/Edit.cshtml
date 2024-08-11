@@ -1,0 +1,59 @@
+﻿@model Works_Life_Cycle.Models.Course
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Editar</h1>
+
+<h4>Curso</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CourseID" />
+            <div class="form-group">
+                <label asp-for="Code" class="control-label"></label>
+                <input asp-for="Code" class="form-control" />
+                <span asp-validation-for="Code" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SpecializationFK" class="control-label"></label>
+                <input asp-for="SpecializationFK" class="form-control" />
+                <span asp-validation-for="SpecializationFK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AreaFK" class="control-label"></label>
+                <select asp-for="AreaFK" class="form-control" asp-items="ViewBag.AreaFK"></select>
+                <span asp-validation-for="AreaFK" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Partnership" /> @Html.DisplayNameFor(model => model.Partnership)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="CollectionFK" class="control-label"></label>
+                <select asp-for="CollectionFK" class="form-control" asp-items="ViewBag.CollectionFK"></select>
+                <span asp-validation-for="CollectionFK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-primary">Voltar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
