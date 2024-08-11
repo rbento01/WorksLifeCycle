@@ -1,0 +1,108 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 17px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+  overflow-y:auto;
+}
+
+body {
+  
+  min-height:100%;
+  
+}
+/*Botao do layout*/
+.botao:hover {
+    border-top-color:yellowgreen;
+    border-top-width:thin;
+
+}
+/************DROPDOWN**********/
+
+/*Imagem para dropdown*/
+.dropdown {
+    position: relative;
+    display: inline-block;
+    width:auto;
+}
+
+/*Lista do Dropdown (Posição do texto está no loginpartial) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 50px;
+    z-index: 10;
+    /*transform: translateX(-45%);*/
+}
+
+/*Aparece a lista com hover no imagem*/
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/*Aparece selecionado a opção com o hover*/
+.dropdown-content form:hover {
+    display: block;
+    background-color: lightgray;
+}
+
+/************DROPDOWN**********/
+
+.loginbox {
+    box-shadow: 0px 2px 30px #888888;
+    margin-left:auto;
+    margin-right:auto;
+    width:350px;
+    height:auto;
+    margin-top: 150px;  
+}
+
+.backgroundfade {
+    height:100%;
+    width:100%;
+    background-image: url('../Background/iptbackground6.jpg');
+    background-size: cover;
+    background-repeat:no-repeat;
+    backdrop-filter:blur(8px);
+    opacity:1;
+    min-height:100%;
+}
+.fpad {
+    padding:5px;
+}
+
+.espaco{
+    /*min-height:306px;*/
+    height:313px;
+    /*min-width: 150px;*/
+}
+
+.dashboardz{
+    position:absolute;
+    top: 150px;
+    left: 100px;
+
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height:60px;
+    line-height: 50px;
+    opacity:1;
+    background-color: #88b77b;
+}
+
+.table{
+    padding-top:30px;
+}
